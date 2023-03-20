@@ -1,0 +1,21 @@
+version: "3"
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole:latest
+    ports:
+      - "192.168.68.10:53:53/tcp"
+      - "192.168.68.10:53:53/udp"
+#      - "67:67/udp"  # Required only for using Pi-hole as a DHCP server
+      - "8200:80/tcp"
+    environment:
+      TZ: 'America/New_York'
+      WEBPASSWORD: 'supersecretpassword'
+    volumes:
+      - '/data/pihole/etc-pihole:/etc/pihole'
+      - '/data/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'    
+    cap_add:
+      - NET_ADMIN
+    restart:
+      unless-stopped
