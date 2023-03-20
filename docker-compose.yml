@@ -19,3 +19,5 @@ services:
       - NET_ADMIN
     restart:
       unless-stopped
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
