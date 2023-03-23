@@ -11,10 +11,10 @@ services:
       - "8200:80/tcp"
     environment:
       TZ: 'America/New_York'
-      WEBPASSWORD: 'supersecretpassword'
+      WEBPASSWORD: ${WEBPASSWORD}
     volumes:
       - '/data/pihole/etc-pihole:/etc/pihole'
-      - '/data/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'    
+      - '/data/pihole/etc-dnsmasq.d:/etc/dnsmasq.d'
     cap_add:
       - NET_ADMIN
     restart:
