@@ -4,11 +4,9 @@ services:
   pihole:
     container_name: pihole
     image: pihole/pihole:latest
-    ports:
-      - "192.168.68.10:53:53/tcp"
-      - "192.168.68.10:53:53/udp"
-#      - "67:67/udp"  # Required only for using Pi-hole as a DHCP server
-      - "8200:80/tcp"
+    networks:
+      prod-net:
+        ipv4_address: 192.168.68.5
     environment:
       TZ: 'America/New_York'
       WEBPASSWORD: ${WEBPASSWORD}
@@ -21,3 +19,7 @@ services:
       unless-stopped
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
+networks:
+  prod-net:
+    external:
+      name: prod-net
